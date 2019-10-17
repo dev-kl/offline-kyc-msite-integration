@@ -1,0 +1,194 @@
+<div ng-controller="FetchController" ng-init="init()">
+
+    <h4 align="center" style="color:#069">Msite Fetch Details</h4>
+
+
+    <div ng-show="IsVisible">
+        <h4 align="center" style="color:black">Face Images</h4>
+
+        <div class="row" style="justify-content: center;
+    align-items:center;display: flex;">
+            <div class="col-md-5">
+                <img class="img-thumbnail" style="width:20vh;height:20vh" src="{{'data:image/jpg;base64,' + docImage}}">
+                <br> <label>Document</label>
+            </div>
+            <div class="col-md-2"> = </div>
+            <div class="col-md-5 ">
+                <img class="img-thumbnail" style="width:20vh;height:20vh"
+                    src="{{'data:image/jpg;base64,' + liveImage}}" />
+                <br> <label>Live</label>
+            </div>
+        </div>
+
+        <h5 Style="text-align:center;">Match Status</h5>
+        <h6 Style="text-align:center;">{{matchStatus}}</h6>
+
+
+        <h5 Style="text-align:center;">Match Rate</h5>
+        <h6 Style="text-align:center;">{{matchRate}}</h6>
+
+    </div>
+    <br>
+    <h4 style="color:#069;text-align:center;">Original KYC Info</h4>
+    <table border="3" align="center" width="380" id="fixedheight" bordercolor="#013246">
+        <tr>
+            <td><label for="apiKey" width="100">Api-Key</label></td>
+            <td><input type="textArea" ng-model="apiKey" name="apiKey" id="apiKey"
+                    style="display:table-cell; width:100%" /></td>
+        </tr>
+        <tr>
+            <td><label for="clientCode" width="100">clientCode</label></td>
+            <td><input type="textArea" ng-model="clientCode" name="clientCode" id="clientCode"
+                    style="display:table-cell; width:100%" /></td>
+        </tr>
+        <tr>
+            <td colspan="2"><input type="button" value="Fetch KYC Data" id="btn-pay" class="buttons"
+                    ng-click="fetchKYC()" style="font-size:14px;" /></td>
+        </tr>
+        <tr>
+            <td><label for="name" width="100">Name</label></td>
+            <td><input type="textArea" ng-model="name" name="name" id="name" value={{name}}
+                    style="display:table-cell; width:100%" /></td>
+        </tr>
+        <tr>
+            <td><label for="documentId" width="100">Document ID</label></td>
+            <td><input type="textArea" ng-model="documentId" name="documentId" id="documentId" value={{documentId}}
+                    style="display:table-cell; width:100%" /></td>
+        </tr>
+        <tr>
+            <td><label for="nameStatus" width="100">Document Type</label></td>
+            <td><input type="textArea" ng-model="docType" name="docType" id="docType" value={{docType}}
+                    style="display:table-cell; width:100%" /></td>
+        </tr>
+        <tr>
+            <td><label for="mobile" width="100">Mobile No</label></td>
+            <td><input type="textArea" ng-model="mobile" name="mobile" id="mobile" value={{mobile}}
+                    style="display:table-cell; width:100%" /></td>
+        </tr>
+        <tr>
+            <td><label for="dob" width="100">DOB</label></td>
+            <td><input type="textArea" ng-model="dob" name="dob" id="dob" value={{dob}}
+                    style="display:table-cell; width:100%" /></td>
+        </tr>
+
+        <td><label for="gender" width="100">Gender</label></td>
+        <td><input type="textArea" ng-model="gender" name="gender" id="gender" value={{gender}}
+                style="display:table-cell; width:100%" /></td>
+        </tr>
+        <tr>
+            <td><label for="address" width="100">Address</label></td>
+            <td><input type="textArea" ng-model="address" name="address" id="address" value={{address}}
+                    style="display:table-cell; width:100%" /></td>
+        </tr>
+        <tr>
+            <td><label for="verifiedBy" width="100">Verified By</label></td>
+            <td><input type="textArea" ng-model="verifiedBy" name="verifiedBy" id="verifiedBy" value={{verifiedBy}}
+                    style="display:table-cell; width:100%" /></td>
+        </tr>
+        <tr>
+            <td><label for="verifiedUsing" width="100">Veified Using</label></td>
+            <td><input type="textArea" ng-model="verifiedUsing" name="verifiedUsing" id="verifiedUsing"
+                    value={{verifiedUsing}} style="display:table-cell; width:100%" /></td>
+        </tr>
+
+    </table>
+
+
+
+
+    <h4 style="color:#069;text-align:center;">Declared KYC Info</h4>
+    <table border="3" align="center" width="380" id="fixedheight" bordercolor="#013246">
+
+        <tr>
+            <td><label for="name" width="100">Name</label></td>
+            <td><input type="textArea" ng-model="declaredName" name="declaredName" id="declaredName"
+                    value={{declaredName}} style="display:table-cell; width:100%" /></td>
+        </tr>
+        <tr>
+            <td><label for="name" width="100">Fathers Name</label></td>
+            <td><input type="textArea" ng-model="declaredFathersName" name="declaredFathersName"
+                    id="declaredFathersName" value={{declaredFathersName}} style="display:table-cell; width:100%" />
+            </td>
+        </tr>
+        <tr>
+            <td><label for="documentId" width="100">Document ID</label></td>
+            <td><input type="textArea" ng-model="declaredDocumentId" name="declaredDocumentId" id="declaredDocumentId"
+                    value={{declaredDocumentId}} style="display:table-cell; width:100%" /></td>
+        </tr>
+        <tr>
+            <td><label for="nameStatus" width="100">Document Type</label></td>
+            <td><input type="textArea" ng-model="declaredDocType" name="declaredDocType" id="declaredDocType"
+                    value={{declaredDocType}} style="display:table-cell; width:100%" /></td>
+        </tr>
+        <tr>
+            <td><label for="dob" width="100">DOB</label></td>
+            <td><input type="textArea" ng-model="declaredDob" name="declaredDob" id="declaredDob" value={{declaredDob}}
+                    style="display:table-cell; width:100%" /></td>
+        </tr>
+
+        <td><label for="gender" width="100">Gender</label></td>
+        <td><input type="textArea" ng-model="declaredGender" name="declaredGender" id="declaredGender"
+                value={{declaredGender}} style="display:table-cell; width:100%" /></td>
+        </tr>
+        <tr>
+            <td><label for="address" width="100">Address</label></td>
+            <td><input type="textArea" ng-model="declaredAddress" name="declaredAddress" id="declaredAddress"
+                    value={{declaredAddress}} style="display:table-cell; width:100%" /></td>
+        </tr>
+
+
+    </table>
+</div>
+
+<style>
+    #fixedheight {
+
+        border-radius: 25px;
+        font-weight: bold;
+        font-size: 16px;
+
+    }
+
+    #fixedheight tr {
+        height: 30px;
+        text-align: center;
+
+    }
+
+    #fixedheight td {
+        font-size: 16px;
+    }
+
+    table tr td:first-child {
+        width: 200px;
+    }
+
+
+    input {
+        border: none;
+        background: transparent;
+        align-content: center;
+        text-align: center;
+        font-size: 16px;
+
+    }
+
+    .buttons {
+        display: inline-block;
+        width: 30%;
+        /* set to 100% */
+        height: 50%;
+        /* set to 100% */
+        margin-bottom: 0.5em;
+        padding-top: .6em;
+        padding-bottom: .6em;
+        color: #fff;
+        background-color: #46A6CD;
+        border-radius: 5px;
+        border: solid #cccccc 1px;
+        box-shadow: 2px 2px 1px #888888;
+        display: block;
+        margin: auto;
+        font-size: 14;
+    }
+</style>
